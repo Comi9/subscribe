@@ -8,3 +8,4 @@ deploy:
   secret_access_key: "S3_SAK"
   bucket: "require.ro"
   region: "eu-west-2"
+  
