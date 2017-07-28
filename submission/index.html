@@ -8,6 +8,22 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+		<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyCKKGifHhA13-4VpO5S97NMxVezNn8XT84",
+				authDomain: "subscribeme-d9732.firebaseapp.com",
+				databaseURL: "https://subscribeme-d9732.firebaseio.com",
+				projectId: "subscribeme-d9732",
+				storageBucket: "",
+				messagingSenderId: "494269301815"
+			};
+			firebase.initializeApp(config);
+		</script>
+
 	</head>
 	<body>
 
@@ -54,7 +70,15 @@
 		</div>
 
 		<script>
-			// document.getElementById('country').select2();
+			function writeUserData(data) {
+				firebase.database().ref('users/' + new Date()).set({
+					firstname: data.firstname,
+					lastname:  data.lastname,
+					email: 	   data.email,
+					country:   data.country,
+					gender:    data.gender
+				});
+			}
 
 			let collectData = function(e) {
 				let formElements = document.getElementById('myForm').elements,
@@ -70,8 +94,9 @@
 								postData[FE.name] = FE.value
 						}
 					}
-					console.log(postData);
 				}
+
+				writeUserData(postData);
 				e.preventDefault();
 			}
 
