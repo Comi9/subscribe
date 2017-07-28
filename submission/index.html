@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>subscribeMe</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	</head>
+	<body>
+
+		<div class="application">
+
+			<form  id="myForm" action="" method="post">
+				<div>
+					<label for="firstname">First name: </label>
+					<input type="text" id="firstname" name="firstname"><BR>
+				</div>
+
+				<div>
+					<label for="lastname">Last name: </label>
+					<input type="text" id="lastname" name="lastname"><BR>
+				</div>
+
+				<div>
+					<label for="email">Email: </label>
+					<input type="text" id="email" name="email"><BR>
+				</div>
+
+				<div>
+					<label for="country">Country: </label>
+					<select name='country' class="form-control" id="country">
+				</div>
+					<option>Romania</option>
+					<option>Canada</option>
+					<option>USA</option>
+					<option>Austria</option>
+					<option>Russia</option>
+				</select>
+
+				<div>
+					<input type="radio" name="gender" value="male"> Male<BR>
+				</div>
+
+				<div>
+					<input type="radio" name="gender" value="female"> Female<BR>
+				</div>
+
+				<button id='submit' type='submit'>Send</button>
+			 </form>
+
+		</div>
+
+		<script>
+			// document.getElementById('country').select2();
+
+			let collectData = function(e) {
+				let formElements = document.getElementById('myForm').elements,
+					postData = {};
+
+				if (formElements) {
+					for (let i = 0; i < formElements.length; i++) {
+						let FE = formElements[i];
+						if (FE.value !== '' && FE.type !== 'submit') {
+							if (FE.type !== 'radio')
+								postData[FE.name] = FE.value;
+							else if (FE.type === 'radio' && FE.checked)
+								postData[FE.name] = FE.value
+						}
+					}
+					console.log(postData);
+				}
+				e.preventDefault();
+			}
+
+			document.getElementById('submit').addEventListener('click', collectData, false);
+		</script>
+	</body>
+</html>
