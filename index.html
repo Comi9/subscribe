@@ -1,111 +1,152 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-</head>
-<body>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-	<div class="application">
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    
+    <!-- App -->
+    <link rel="stylesheet" href="css/app.css">
 
-		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<a class="navbar-brand" href="#">subscribeMe</a>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCKKGifHhA13-4VpO5S97NMxVezNn8XT84",
+        authDomain: "subscribeme-d9732.firebaseapp.com",
+        databaseURL: "https://subscribeme-d9732.firebaseio.com",
+        projectId: "subscribeme-d9732",
+        storageBucket: "",
+        messagingSenderId: "494269301815"
+      };
+      firebase.initializeApp(config);
+    </script>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-					<a class="nav-link" href="#">Subscribe <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+    <style>
+      @media (max-width: 992px) {
+          .display-3 {
+            font-size: 30px;
+          }
+      }
+    </style>
+  </head>
+  <body>
 
-		<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-6  col-sm-12 push-md-3">
+            <h1 class="display-3">Subscribe<strong>ME</strong></h1>
+            <p class="lead">Get notifications about our services</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-6  col-sm-12 push-md-3 mb-3">
 
-			<div class="row">
-				<div class="col-md-6 col-sm-12 push-md-3">
-					<form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">First name</label>
-							<input type="text" class="form-control" id="firstName" aria-describedby="firstName" placeholder="Enter first name">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
+          <form id="subscribeME-form">
+            <div class="form-group">
+              <label for="firstName"><strong>First name</strong></label>
+              <input type="text" name="firstname" class="form-control" id="firstName" placeholder="Type your first name">
+            </div>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">Last name</label>
-							<input type="text" class="form-control" id="lastName" aria-describedby="lastName" placeholder="Enter last name">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
+            <div class="form-group">
+              <label for="lastName"><strong>Last name</strong></label>
+              <input type="text" name="lastname" class="form-control" id="lastName" placeholder="Type your last name">
+            </div>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
+            <div class="form-group">
+              <label for="emailAddress"><strong>Email</strong></label>
+              <input type="email" name="email" class="form-control" id="emailAddress" placeholder="Type your email address">
+            </div>
 
-						<div class="form-group">
-							<label for="exampleSelect1">Country</label>
-							<select class="form-control" id="exampleSelect1">
-								<option>Romania</option>
-								<option>Canada</option>
-								<option>USA</option>
-								<option>Austria</option>
-								<option>Russia</option>
-							</select>
-						</div>
+            <div class="form-group">
+              <label for="countrySelector"><strong>Country</strong></label>
+              <select class="form-control" name="country" id="countrySelector">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
 
-						<fieldset class="form-group">
-							<legend>Gender</legend>
-							<div class="form-check">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-									M
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-									F
-								</label>
-							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-									<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option3">
-									Other
-								</label>
-							</div>
-						</fieldset>
+            <div class="text-right">            
+              <a href="" class="btn btn-primary" id="submit-data">Subscribe<strong>ME</strong></a>
+            </div>
+          </form>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input">
-								Receive newsletter
-							</label>
-						</div>
+          <div class="card text-center mt-5">
+            <div class="card-header">
+              Featured
+            </div>
+            <div class="card-block">
+              <h4 class="card-title">Special Offer</h4>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-secondary" id="go-somewhere">Go somewhere</a>
+            </div>
+          </div>
 
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
+          <div class="card mt-3">
+            <div class="card-block text-center">
+              <small>&copy; 2017 Subscribe<strong>ME</strong></small>
+            </div>
+          </div>
 
-		</div>
-	</div>
+        </div>
+      </div>
+    </div>
 
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-	<script>
-		$('#exampleSelect1').select2();
-	</script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+      $('select').select2();
+
+      function writeUserData(data) {
+        firebase.database().ref('users/' + new Date()).set({
+          firstname: data.firstname,
+          lastname:  data.lastname,
+          email:     data.email,
+          country:   data.country,
+          // gender:    data.gender
+        });
+      }
+
+      let collectData = function(e) {
+        e.preventDefault();
+        let formElements = document.getElementById('subscribeME-form').elements,
+            postData = {};
+
+        if (formElements) {
+          for (let i = 0; i < formElements.length; i++) {
+            let FE = formElements[i];
+            if (FE.value !== '' && FE.type !== 'submit') {
+              if (FE.type !== 'radio')
+                postData[FE.name] = FE.value;
+              else if (FE.type === 'radio' && FE.checked)
+                postData[FE.name] = FE.value
+            }
+          }
+        }
+
+        console.log(postData);
+
+        writeUserData(postData);
+      }
+
+      document.getElementById('submit-data').addEventListener('click', collectData, false);
+    </script>
+  </body>
 </html>
