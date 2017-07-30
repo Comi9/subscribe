@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SubscribeMe Admin</title>
+	<link rel="stylesheet" href="">
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  let config = {
+	    apiKey: "AIzaSyCKKGifHhA13-4VpO5S97NMxVezNn8XT84",
+	    authDomain: "subscribeme-d9732.firebaseapp.com",
+	    databaseURL: "https://subscribeme-d9732.firebaseio.com",
+	    projectId: "subscribeme-d9732",
+	    storageBucket: "",
+	    messagingSenderId: "494269301815"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		let database = firebase.database(),
+			ref = database.ref("users"),
+        	collection = [];
+
+		ref.on("value", function(snapshot) {
+		    for (x in snapshot.val()) {
+		        database.ref("users").once("value", function(xsnapshot) {
+		            data = xsnapshot.val();
+		        });
+		    }
+            collection.push(data)
+		});
+        console.log(collection);
+	</script>
+</body>
+</html>
